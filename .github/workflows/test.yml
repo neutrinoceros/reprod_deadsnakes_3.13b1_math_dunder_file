@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: 'py${{ matrix.python-version }} (from ${{ matrix.provider }}) | free-threading: ${{ !matrix.nogil }}'
+    name: 'py${{ matrix.python-version }} (from ${{ matrix.provider }}) | free-threading: ${{ matrix.nogil }}'
     runs-on: ubuntu-22.04
     timeout-minutes: 20
 
