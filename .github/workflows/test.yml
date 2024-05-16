@@ -6,20 +6,20 @@ on:
 jobs:
   build:
     name: 'py${{ matrix.python-version }} (from ${{ matrix.provider }}) | free-threading: ${{ !matrix.nogil }}'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 20
 
     strategy:
       fail-fast: false
       matrix:
         include:
-          - python-version: 3.13-dev
+          - python-version: 3.13.0b1
             provider: github-actions
             nogil: true
-          - python-version: 3.13-dev
+          - python-version: 3.13.0b1
             provider: deadsnakes
             nogil: false
-          - python-version: 3.13-dev
+          - python-version: 3.13.0b1
             provider: deadsnakes
             nogil: false
 
