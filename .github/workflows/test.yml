@@ -36,4 +36,6 @@ jobs:
         nogil: ${{ matrix.nogil }}
     - run: python -m pip install pytest
     - run: python -m pip list
+    - run: lsb_release -a
+    - run: uname -a
     - run: pytest --color=yes test.py
