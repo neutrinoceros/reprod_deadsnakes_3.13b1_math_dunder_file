@@ -1,0 +1,39 @@
+name: Test Python 3.13 builds
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 'py${{ matrix.python-version }} | free-threading: ${{ !matrix.nogil }}'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python-version: 3.13-dev
+            provider: github-actions
+            nogil: false
+          - python-version: 3.13-dev
+            provider: deadsnakes
+            nogil: false
+          - python-version: 3.13-dev
+            provider: deadsnakes
+            nogil: true
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      if: ${{ matrix.provider == 'github-actions' }}
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: deadsnakes/action@v3.1.0
+      if: ${{ matrix.provider == 'deadsnakes' }}
+      with:
+        python-version: ${{ matrix.python-version }}
+        nogil: ${{ matrix.nogil }}
+    - run: python -m pip install pytest
+    - run: python -m pip list
+    - run: pytest --color=yes test.py
