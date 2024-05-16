@@ -13,13 +13,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python-version: 3.13.0b1
+          - python-version: 3.13.0-beta.1
             provider: github-actions
             nogil: true
-          - python-version: 3.13.0b1
+          - python-version: 3.13-dev
             provider: deadsnakes
             nogil: false
-          - python-version: 3.13.0b1
+          - python-version: 3.13-dev
             provider: deadsnakes
             nogil: false
 
